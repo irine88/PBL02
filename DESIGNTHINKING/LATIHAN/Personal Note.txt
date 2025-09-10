@@ -1,1 +1,199 @@
 Break down Tugas Akhir
+
+
+RapiToko – Aplikasi Web untuk Pengelolaan Stok Barang dan Keuangan Warung UMKM
+------------------------------------------------------------------------------
+
+
+
+                                                    DATABASE / TABLES
+--------------------------------------------------------------------------------------------------------------------
+ role
+| Kolom       | Tipe Data | Panjang / Detail | Keterangan                  |
+| ----------- | --------- | ---------------- | --------------------------- |
+| roleid      | CHAR      | 1                | PK, unique                  |
+| rolename    | VARCHAR   | 50               |                             |
+| description | TEXT      | —                |                             |
+
+	 role content:
+	| roleid | rolename     | description                               |
+	| ------ | ------------ | ----------------------------------------- |
+	| 1      | owner        | Hak akses penuh, pengelola utama aplikasi |
+	| 2      | admin        | Mengelola user, stok, laporan             |
+	| 3      | kasir        | Mengelola transaksi penjualan             |
+	| 4      | staf\_gudang | Mengelola barang masuk dan keluar stok    |
+	| 5      | manager      | Memantau laporan dan performa usaha       |
+
+Additional Description
+----------------------
+1. Owner (Pemilik)
+Deskripsi: Pengguna dengan hak akses penuh, pengelola utama aplikasi dan usaha.
+Hak akses:
+Kelola user dan role (termasuk owner lain)
+Lihat dan kelola semua data (stok, keuangan, laporan)
+Setting aplikasi dan konfigurasi penting
+
+2. Admin
+Deskripsi: Pengelola operasional harian, membantu owner dalam mengelola data.
+Hak akses:
+Tambah/edit/hapus user selain owner
+Kelola stok dan produk
+Lihat dan buat laporan keuangan dan stok
+Tidak bisa mengubah role owner
+
+3. Kasir
+Deskripsi: Bertugas mengelola transaksi penjualan.
+Hak akses:
+Proses transaksi penjualan dan pembayaran
+Lihat stok produk terbatas
+Input data penjualan harian
+Tidak bisa mengubah data user dan role
+
+4. Staf Gudang
+Deskripsi: Mengelola persediaan barang masuk dan keluar.
+Hak akses:
+Input barang masuk dan keluar stok
+Lihat data stok secara lengkap
+Tidak bisa mengakses data keuangan dan user
+
+5. Manager
+Deskripsi: Memantau dan memonitor kinerja usaha dan laporan.
+Hak akses:
+Lihat laporan keuangan dan stok lengkap
+Lihat data penjualan
+Tidak bisa mengubah data user, stok, atau keuangan
+
+--------------------------------------------------------------------------------------------------------------------
+ user
+| Kolom     | Tipe Data | Panjang | Keterangan                      | Contoh Isi                                                     |
+| --------- | --------- | ------- | ------------------------------- | ---------------------------------------------------------------|
+| userid    | CHAR      | 10      | PK, unique                      | `U251009001`                                                   |
+| username  | VARCHAR   | 20      | unique                          | `budi_warung`                                                  |
+| password  | VARCHAR   | 100     | Hash password                   | `$2a$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36KZQhOukdGJKbG0lv6K1Ym` |
+| name      | VARCHAR   | 50      | Nama lengkap user               | `Budi Santoso`                                                 |
+| roleid    | INT       | —       | Mengacu ke tabel role           | `3` (kasir)                                                    |
+| email     | VARCHAR   | 100     | Email user, opsional            | `budi@example.com`                                             |
+| phone     | VARCHAR   | 20      | Nomor telepon, opsional         | `08123456789`                                                  |
+| whatsapp  | VARCHAR   | 20      | Nomor WhatsApp, opsional        | `08123456789`                                                  |
+| createdat | TIMESTAMP | —       | Waktu data dibuat               | `2025-09-10 10:00:00`                                          |
+| updatedat | TIMESTAMP | —       | Waktu data terakhir diupdate    | `2025-09-12 15:30:00`                                          |
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+Pages
+-----
+
+
+
+
+
+
+
+
+
+
+
+
+Note:
+- penamaan system : English
+  tampilan page: Indonesian
