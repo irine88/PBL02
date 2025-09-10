@@ -15,7 +15,7 @@ RapiToko – Aplikasi Web untuk Pengelolaan Stok Barang dan Keuangan Warung UMKM
 | rolename    | VARCHAR   | 50               |                             |
 | description | TEXT      | —                |                             |
 
-	 role content:
+	 role content (fix):
 	| roleid | rolename     | description                               |
 	| ------ | ------------ | ----------------------------------------- |
 	| 1      | owner        | Hak akses penuh, pengelola utama aplikasi |
@@ -64,46 +64,50 @@ Lihat data penjualan
 Tidak bisa mengubah data user, stok, atau keuangan
 
 --------------------------------------------------------------------------------------------------------------------
+
  user
 | Kolom     | Tipe Data | Panjang | Keterangan                      | Contoh Isi                                                     |
 | --------- | --------- | ------- | ------------------------------- | ---------------------------------------------------------------|
-| userid    | CHAR      | 10      | PK, unique                      | `U251009001`                                                   |
+| userid    | CHAR      | 12      | PK, unique                      | `U251009001`                                                   |
 | username  | VARCHAR   | 20      | unique                          | `budi_warung`                                                  |
 | password  | VARCHAR   | 100     | Hash password                   | `$2a$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36KZQhOukdGJKbG0lv6K1Ym` |
-| name      | VARCHAR   | 50      | Nama lengkap user               | `Budi Santoso`                                                 |
-| roleid    | INT       | —       | Mengacu ke tabel role           | `3` (kasir)                                                    |
-| email     | VARCHAR   | 100     | Email user, opsional            | `budi@example.com`                                             |
-| phone     | VARCHAR   | 20      | Nomor telepon, opsional         | `08123456789`                                                  |
-| whatsapp  | VARCHAR   | 20      | Nomor WhatsApp, opsional        | `08123456789`                                                  |
-| createdat | TIMESTAMP | —       | Waktu data dibuat               | `2025-09-10 10:00:00`                                          |
-| updatedat | TIMESTAMP | —       | Waktu data terakhir diupdate    | `2025-09-12 15:30:00`                                          |
+| name      | VARCHAR   | 50      |                                 | `Budi Santoso`                                                 |
+| roleid    | INT       | —       | FK to            role           | `3` (kasir)                                                    |
+| email     | VARCHAR   | 100     |                                 | `budi@example.com`                                             |
+| phone     | VARCHAR   | 20      |                                 | `08123456789`                                                  |
+| whatsapp  | VARCHAR   | 20      |                                 | `08123456789`                                                  |
+| createdat | TIMESTAMP | —       |                                 | `2025-09-10 10:00:00`                                          |
+| updatedat | TIMESTAMP | —       |                                 | `2025-09-12 15:30:00`                                          |
 
 --------------------------------------------------------------------------------------------------------------------
 
-
-
-
-
-
-
-
-
-
-
+ customer
+| Kolom      | Tipe Data    | Panjang | Keterangan                   |
+| ---------- | ------------ | ------- | ---------------------------- |
+| customerid | CHAR(10)     | —       | PK, unique                   |
+| name       | VARCHAR(100) | —       |                              |
+| address    | TEXT         | —       |                              |
+| phone      | VARCHAR(20)  | —       |                              |
+| whatsapp   | VARCHAR(20)  | —       |                              |
+| email      | VARCHAR(100) | —       |                              |
+| pic        | VARCHAR(100) | —       |                              |
+| createdat  | TIMESTAMP    | —       |                              |
+| updatedat  | TIMESTAMP    | —       |                              |
 
 --------------------------------------------------------------------------------------------------------------------
 
-
-
-
-
-
-
-
-
-
-
-
+ supplier
+| Kolom      | Tipe Data    | Panjang | Keterangan                   |
+| ---------- | ------------ | ------- | ---------------------------- |
+| supplierid | CHAR(10)     | —       | PK, unique                   |
+| name       | VARCHAR(100) | —       |                              |
+| address    | TEXT         | —       |                              |
+| phone      | VARCHAR(20)  | —       |                              |
+| whatsapp   | VARCHAR(20)  | —       |                              |
+| email      | VARCHAR(100) | —       |                              |
+| pic        | VARCHAR(100) | —       |                              |
+| createdat  | TIMESTAMP    | —       |                              |
+| updatedat  | TIMESTAMP    | —       |                              |
 
 --------------------------------------------------------------------------------------------------------------------
 
