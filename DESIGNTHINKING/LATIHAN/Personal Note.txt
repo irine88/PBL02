@@ -29,9 +29,7 @@ Additional Description
 1. Owner (Pemilik)
 Deskripsi: Pengguna dengan hak akses penuh, pengelola utama aplikasi dan usaha.
 Hak akses:
-Kelola user dan role (termasuk owner lain)
-Lihat dan kelola semua data (stok, keuangan, laporan)
-Setting aplikasi dan konfigurasi penting
+Full Access
 
 2. Admin
 Deskripsi: Pengelola operasional harian, membantu owner dalam mengelola data.
@@ -72,7 +70,7 @@ Tidak bisa mengubah data user, stok, atau keuangan
 | username  | VARCHAR   | 20      | unique                          | `budi_warung`                                                  |
 | password  | VARCHAR   | 100     | Hash password                   | `$2a$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36KZQhOukdGJKbG0lv6K1Ym` |
 | name      | VARCHAR   | 50      |                                 | `Budi Santoso`                                                 |
-| roleid    | INT       | —       | FK to            role           | `3` (kasir)                                                    |
+| roleid    | INT       | —       | FK to role                      | `3` (kasir)                                                    |
 | email     | VARCHAR   | 100     |                                 | `budi@example.com`                                             |
 | phone     | VARCHAR   | 20      |                                 | `08123456789`                                                  |
 | whatsapp  | VARCHAR   | 20      |                                 | `08123456789`                                                  |

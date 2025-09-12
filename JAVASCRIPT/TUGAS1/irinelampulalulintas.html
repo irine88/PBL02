@@ -9,13 +9,31 @@
     <!-- Tugas:
     1. Buat dalam 1 or 2 file (HTML / JS) untuk membuat aplikasi kecil mengenai input BOM (Browser Object Model) -> method prompt() dan outputnya menggunakan DOM (Document Object Model) untuk membuat lampu lalu lintas.
     2. Bila input data adalah merah, maka output adalah Kendaraan Berhenti. Jika input adalah kuning, outputnya adalah Kendaraan Berhati-hati. Selain itu, input adalah hijau maka Kendaraan Berjalan. -->
-    <script>
-        let input = prompt("Masukkan Warna Lampu Lalu Lintas : ");
-        if (input.toUpperCase() == "MERAH")
+
+    <!-- <script>
+        let input = prompt("Masukkan Warna Lampu Lalu Lintas : (Merah/Kuning/Hijau)");
+        if (input.toUpperCase() === "MERAH")
             document.write("Kendaraan Berhenti");
-        else if (input.toUpperCase() == "KUNING")
+        else if (input.toUpperCase() === "KUNING")
             document.write("Kendaraan Berhati-hati");
-        else if (input.toUpperCase() == "HIJAU")
+        else if (input.toUpperCase() === "HIJAU")
+            document.write("Kendaraan Berjalan");
+        else
+            document.write("Input Salah!");
+    </script> -->
+
+    <script>
+        let input;
+	    do {
+		    input = prompt("Masukkan Warna Lampu Lalu Lintas : (Merah/Kuning/Hijau)");
+            if (input !== null)
+        	    input = input.toUpperCase();
+        } while (input !== "MERAH" && input !== "KUNING" && input !== "HIJAU");
+        if (input === "MERAH")
+            document.write("Kendaraan Berhenti");
+        else if (input === "KUNING")
+            document.write("Kendaraan Berhati-hati");
+        else if (input === "HIJAU")
             document.write("Kendaraan Berjalan");
         else
             document.write("Input Salah!");

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let nama, jenisKelamin, status, keterangan;
+        //display form 1 (Nama)
+        nama = prompt("Masukkan Nama : ");
+        //display form 2 (Jenis Kelamin)
+        //jenisKelamin = prompt("Masukkan Jenis Kelamin : (Pria / Wanita)").toUpperCase();
+        jenisKelamin = prompt("Masukkan Jenis Kelamin : (Pria / Wanita)");
+        //display form 3 (Status)
+        //status = prompt("Masukkan Status : (Sendiri / Kawin / Cerai)").toUpperCase();
+        status = prompt("Masukkan Status : (Sendiri / Kawin / Cerai)");
+        //determine Keterangan
+        if (jenisKelamin[0].toUpperCase() === "P") {
+            if (status[0].toUpperCase() === "S")
+                keterangan = "Perjaka";
+            else if (status[0].toUpperCase() === "K")
+                keterangan = "Menikah";
+            else if (status[0].toUpperCase() === "C")
+                keterangan = "Duda";}
+        else if (jenisKelamin[0].toUpperCase() === "W") {
+            if (status[0].toUpperCase() === "S")
+                keterangan = "Perawan";
+            else if (status[0].toUpperCase() === "K")
+                keterangan = "Menikah";
+            else if (status[0].toUpperCase() === "C")
+                keterangan = "Janda";}
+        document.write("Nama : " + nama + "<br>");
+        document.write("jenisKelamin : " + jenisKelamin + "<br>");
+        document.write("Status : " + status + "<br>");
+        document.write("Keterangan : " + keterangan);           
+    </script>
+</body>
+</html>
