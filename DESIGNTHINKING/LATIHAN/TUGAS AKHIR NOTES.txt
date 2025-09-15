@@ -9,76 +9,88 @@ RapiToko – Aplikasi Web untuk Pengelolaan Stok Barang dan Keuangan Warung UMKM
                                                     DATABASE / TABLES
 --------------------------------------------------------------------------------------------------------------------
  user
-| Kolom     | Tipe Data | Panjang | Keterangan                      | Contoh Isi                                                     |
-| --------- | --------- | ------- | ------------------------------- | ---------------------------------------------------------------|
-| userid    | CHAR      | 12      | PK, unique                      | `U251009001`                                                   |
-| username  | VARCHAR   | 20      | unique                          | `budi_warung`                                                  |
-| password  | VARCHAR   | 100     | Hash password                   | `$2a$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36KZQhOukdGJKbG0lv6K1Ym` |
-| name      | VARCHAR   | 50      |                                 | `Budi Santoso`                                                 |
-| email     | VARCHAR   | 100     |                                 | `budi@example.com`                                             |
-| phone     | VARCHAR   | 20      |                                 | `08123456789`                                                  |
-| whatsapp  | VARCHAR   | 20      |                                 | `08123456789`                                                  |
-| createdat | TIMESTAMP | —       |                                 | `2025-09-10 10:00:00`                                          |
-| updatedat | TIMESTAMP | —       |                                 | `2025-09-12 15:30:00`                                          |
+| Field Name| Data Type | Length  | Description                     | Data Content
+| --------- | --------- | ------- | ------------------------------- | -------------------------------------------------------------|
+| userid    | CHAR      | 12      | PK, unique                      | U251009001                                                   |
+| username  | VARCHAR   | 20      | unique                          | budi_warung                                                  |
+| password  | VARCHAR   | 100     | Hash password                   | $2a$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36KZQhOukdGJKbG0lv6K1Ym |
+| name      | VARCHAR   | 50      |                                 | Budi Santoso                                                 |
+| email     | VARCHAR   | 100     |                                 | budi@example.com                                             |
+| phone     | VARCHAR   | 20      |                                 | 08123456789                                                  |
+| whatsapp  | VARCHAR   | 20      |                                 | 08123456789                                                  |
+| createdat | TIMESTAMP | —       |                                 | 2025-09-10 10:00:00                                          |
+| updatedat | TIMESTAMP | —       |                                 | 2025-09-12 15:30:00                                          |
 
 --------------------------------------------------------------------------------------------------------------------
  customer
-| Kolom      | Tipe Data    | Panjang | Keterangan                   |
+| Field Name | Data Type    | Length  | Description                  | Data Content
 | ---------- | ------------ | ------- | ---------------------------- |
-| customerid | CHAR(10)     | —       | PK, unique                   |
-| name       | VARCHAR(100) | —       |                              |
+| customerid | CHAR         | 10      | PK, unique                   |
+| name       | VARCHAR      | 100     |                              |
 | address    | TEXT         | —       |                              |
-| phone      | VARCHAR(20)  | —       |                              |
-| whatsapp   | VARCHAR(20)  | —       |                              |
-| email      | VARCHAR(100) | —       |                              |
-| pic        | VARCHAR(100) | —       |                              |
+| phone      | VARCHAR      | 20      |                              |
+| whatsapp   | VARCHAR      | 20      |                              |
+| email      | VARCHAR      | 100     |                              |
+| pic        | VARCHAR      | 100     |                              |
 | createdat  | TIMESTAMP    | —       |                              |
 | updatedat  | TIMESTAMP    | —       |                              |
 
 --------------------------------------------------------------------------------------------------------------------
  supplier
-| Kolom      | Tipe Data    | Panjang | Keterangan                   |
+| Field Name | Data Type    | Length  | Description                  | Data Content
 | ---------- | ------------ | ------- | ---------------------------- |
-| supplierid | CHAR(10)     | —       | PK, unique                   |
-| name       | VARCHAR(100) | —       |                              |
+| supplierid | CHAR         | 10      | PK, unique                   |
+| name       | VARCHAR      | 100     |                              |
 | address    | TEXT         | —       |                              |
-| phone      | VARCHAR(20)  | —       |                              |
-| whatsapp   | VARCHAR(20)  | —       |                              |
-| email      | VARCHAR(100) | —       |                              |
-| pic        | VARCHAR(100) | —       |                              |
+| phone      | VARCHAR      | 20      |                              |
+| whatsapp   | VARCHAR      | 20      |                              |
+| email      | VARCHAR      | 100     |                              |
+| pic        | VARCHAR      | 100     |                              |
 | createdat  | TIMESTAMP    | —       |                              |
 | updatedat  | TIMESTAMP    | —       |                              |
 
 --------------------------------------------------------------------------------------------------------------------
-goods
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+items
+| Field Name    | Data Type | Length | Description                             | Example Data         |
+| ------------- | --------- | ------ | --------------------------------------- | -------------------- |
+| item_id       | CHAR      | 10     | PK, unique                              | 0000001234           |
+| item_name     | VARCHAR   | 100    |                                         | Indomie Goreng       |
+| item_price    | INT       | —      |                                         | 2500                 |
+| item_cost     | INT       | —      |                                         | 2000                 |
+| item stock    | INT       | —      |                                         | 24                   |
+| item_unit     | VARCHAR   | 20     |                                         | pcs or bungkus       |
+| item_category | VARCHAR   | 50     |                                         | Minuman              |
+| is_active     | BOOLEAN   | —      |                                         | TRUE or FALSE        |
+| created_a`    | TIMESTAMP | —      |                                         | 2025-09-15 10:32:00  |
+| updated_at    | TIMESTAMP | —      |                                         | 2025-09-15 11:45:23  |
 
 --------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
+input
+| Field Name      | Data Type | Length | Description                            | Example Data        |
+| --------------- | --------- | ------ | -------------------------------------- | ------------------- |
+| inputid         | CHAR      | 12     | PK, unique                             | INP20250915001      |
+| supplierid      | CHAR      | 10     | FK to `supplier.supplierid`            | SUP000001           |
+| userid          | CHAR      | 12     | FK to `user.userid` (who created it)   | U251009001          |
+| input_date      | DATE      | —      | Date when the transaction occurred     | 2025-09-15          |
+| total_items     | INT       | —      | Total number of different items        | 3                   |
+| total_quantity  | INT       | —      | Total quantity across all items        | 30                  |
+| total_cost      | INT       | —      | Total cost (sum of all item subtotals) | 150000              |
+| notes           | TEXT      | —      | Optional notes (e.g., invoice #)       | Invoice #123        |
+| createdat       | TIMESTAMP | —      | Time of transaction creation           | 2025-09-15 14:00:00 |
+| updatedat       | TIMESTAMP | —      | Time of last update (if any)           | 2025-09-15 14:00:00 |
 
 --------------------------------------------------------------------------------------------------------------------
+input_detail
+| Field Name  | Data Type | Length | Description                                  | Example Data          |
+| ----------- | --------- | ------ | -------------------------------------------- | --------------------- |
+| inputid     | CHAR      | 12     | FK to `input_transaction.inputid`            | `'INP20250915001'`    |
+| detailid    | CHAR      | 14     | ✅ Primary Key – unique ID for each line item | `'INPDTL00000123'`    |
+| item_id    | CHAR      | 10     | FK to `items.item_id`                        | `'0000001234'`        |
+| quantity    | INT       | —      | Quantity of the item added to stock          | `10`                  |
+| cost_price | INT       | —      | Cost price per unit                          | `2000`                |
+| subtotal    | INT       | —      | `quantity * cost_price`                      | `20000`               |
+| notes       | TEXT      | —      | Optional (e.g., batch number, brand)         | `'Batch A1'`          |
+| createdat   | TIMESTAMP | —      | Time the line item was created               | `2025-09-15 14:05:00` |
 
 
 

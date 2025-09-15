@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas 4 - Switch & String Functions</title>
+</head>
+<body>
+    <h2>Isi Data Pegawai</h2>
+
+    <label for="name">Nama:</label><br>
+    <input type="text" id="name" placeholder="Nama Lengkap"><br><br>
+
+    <label for="nip">NIP:</label><br>
+    <input type="text" id="nip" placeholder="18 digit NIP"><br><br>
+
+    <button onclick="showResult()">Submit</button>
+
+    <hr>
+
+    <div id="result"></div>
+  
+    <script>
+        function showResult() {
+        let name = document.getElementById("name").value;
+        let nip = document.getElementById("nip").value;
+      
+        function getBulan(nomorBulan)
+        {
+    	    let namaBulan;
+    	    switch(nomorBulan)
+            {
+        	    case "01":
+            	    namaBulan = "Januari";
+                    break;
+                case "02":
+            	    namaBulan = "Februari";
+                    break;
+                case "03":
+            	    namaBulan = "Maret";
+                    break;
+                case "04":
+            	    namaBulan = "April";
+                    break;
+                case "05":
+            	    namaBulan = "Mei";
+                    break;
+                case "06":
+            	    namaBulan = "Juni";
+                    break;
+                case "07":
+            	    namaBulan = "Juli";
+                    break;
+                case "08":
+            	    namaBulan = "Agustus";
+                    break;
+                case "09":
+            	    namaBulan = "September";
+                    break;
+                case "10":
+            	    namaBulan = "Oktober";
+                    break;
+                case "11":
+            	    namaBulan = "November";
+                    break;
+                case "12":
+            	    namaBulan = "Desember";
+                    break;	
+            }
+            return namaBulan;
+        }
+        
+        if (name === "") {
+            document.getElementById("result").innerHTML = "<p style='color:red;'>Nama harus diisi. Silakan isi lagi.</p>";
+            document.getElementById("name").focus();
+            return;
+        }
+        
+        if (nip.length !== 18) {
+            document.getElementById("result").innerHTML = "<p style='color:red;'>NIP harus terdiri dari 18 digit angka. Silakan isi lagi.</p>";
+            document.getElementById("nip").focus();
+            return;
+        }
+	
+        let tahunLahir, bulanLahir, tanggalLahir, ulangTahun, tanggalAsn, tahunAsn, bulanAsn, jenisKelamin, kelamin, noUrut;
+    
+        ulangTahun = nip.substring(0, 8);
+        tahunLahir = ulangTahun.substring(0, 4);
+        bulanLahir = ulangTahun.substring(4, 6);
+        tanggalLahir = ulangTahun.substring(6, 8);
+        tanggalAsn = nip.substring(8, 14);
+        tahunAsn = tanggalAsn.substring(0, 4);
+        bulanAsn = tanggalAsn.substring(4, 6);
+        jenisKelamin = nip.substring(14, 15);
+        noUrut = nip. substring(15);
+    
+        switch(jenisKelamin)
+        {
+    	    case "1":
+        	    kelamin = "Pria";
+                break;
+            case "2":
+        	    kelamin = "Wanita";
+                break;
+            default:
+        	    kelamin = "Not Known";
+        }
+    
+        function formatDate(dateString) {
+            let day = dateString.substring(6, 8);
+            let month = dateString.substring(4, 6);
+            let year = dateString.substring(0, 4);
+        
+            let dateObj = new Date(year, month - 1, day); // month is 0-indexed
+            return dateObj.toLocaleDateString('id-ID', {
+            weekday: 'long', // full weekday name (e.g., "Minggu")
+            day: 'numeric',  // day of the month
+            month: 'long',   // full month name (e.g., "September")
+            year: 'numeric'  // full year (e.g., "1972")
+            });
+        }
+    
+        document.getElementById("result").innerHTML = `
+            <p><strong>Nama:</strong> ${name}</p>
+            <p><strong>NIP:</strong> ${nip}</p>
+            <p><strong>Tanggal Lahir:</strong> ${formatDate(ulangTahun)}</p>
+            <p><strong>Bulan ASN:</strong> ${getBulan(bulanAsn).concat(" ", tahunAsn)}</p>
+            <p><strong>Jenis Kelamin:</strong> ${kelamin}</p>
+            <p><strong>No. Urut:</strong> ${noUrut}</p>
+            `;
+        }
+    </script>
+</body>
+</html>
+
+            <!-- <p><strong>Tahun Lahir:</strong> ${tahunLahir}</p>
+            <p><strong>Bulan Lahir:</strong> ${getBulan(bulanLahir)}</p>
+            <p><strong>Tanggal Lahir:</strong> ${tanggalLahir}</p>
+            <p><strong>Tanggal ASN:</strong> ${tanggalAsn}</p>
+            <p><strong>Jenis Kelamin:</strong> ${jenisKelamin}</p> -->
+            <!-- <p><strong>Tahun ASN:</strong> ${tahunAsn}</p> -->
