@@ -69,7 +69,7 @@ input
 | Field Name      | Data Type | Length | Description                            | Example Data        |
 | --------------- | --------- | ------ | -------------------------------------- | ------------------- |
 | inputid         | CHAR      | 12     | PK, unique                             | INP20250915001      |
-| supplierid      | CHAR      | 10     | FK to `supplier.supplierid`            | SUP000001           |
+| supplierid      | CHAR      | 10     | FK to supplier.supplierid              | SUP000001           |
 | userid          | CHAR      | 12     | FK to `user.userid` (who created it)   | U251009001          |
 | input_date      | DATE      | —      | Date when the transaction occurred     | 2025-09-15          |
 | total_items     | INT       | —      | Total number of different items        | 3                   |
