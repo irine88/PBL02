@@ -4,21 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tugas 4 - Switch & String Functions</title>
+    <style>
+        .form-row {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .form-row label {
+            width: 80px; /* adjust based on your label size */
+            margin-right: 10px;
+            text-align: left;
+        }
+
+        .form-row input {
+            width: 200px;
+        }
+
+        #result {
+            text-align: left;
+            width: 300px;
+            margin-left: calc(50% - 150px);
+        }
+
+    </style>
 </head>
-<body>
+<body style="margin: 10px auto; text-align: center; border: 1px solid; width: 350px;">
+    
     <h2>Isi Data Pegawai</h2>
 
-    <label for="name">Nama:</label><br>
-    <input type="text" id="name" placeholder="Nama Lengkap"><br><br>
+    <div class="form-row">
+        <label for="name">Nama:</label>
+        <input type="text" id="name" placeholder="Nama Lengkap">
+    </div>
 
-    <label for="nip">NIP:</label><br>
-    <input type="text" id="nip" placeholder="18 digit NIP"><br><br>
+    <!-- <label for="name">Nama:</label><br>
+    <input type="text" id="name" placeholder="Nama Lengkap"><br><br> -->
+    <div class="form-row">
+        <label for="nip">NIP:</label><br>
+        <input type="text" id="nip" placeholder="18 digit NIP"><br><br>
+    </div>
 
-    <button onclick="showResult()">Submit</button>
+    <button onclick="showResult()" style="margin: 5px">Submit</button>
 
-    <hr>
+    <!-- <hr style="width: 300px"> -->
 
-    <div id="result"></div>
+    
+    <div id="result" style="margin: 25px"></div>
+    
   
     <script>
         function showResult() {
@@ -121,6 +154,7 @@
         }
     
         document.getElementById("result").innerHTML = `
+            <p><hr style="width: 300px"></p>
             <p><strong>Nama:</strong> ${name}</p>
             <p><strong>NIP:</strong> ${nip}</p>
             <p><strong>Tanggal Lahir:</strong> ${formatDate(ulangTahun)}</p>
