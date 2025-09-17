@@ -2,155 +2,845 @@ Break down Tugas Akhir
 
 
 RapiToko – Aplikasi Web untuk Pengelolaan Stok Barang dan Keuangan Warung UMKM
-------------------------------------------------------------------------------
-
-
-
-                                                    DATABASE / TABLES
---------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------
+                                               DATABASE / TABLES
+---------------------------------------------------------------------------------------------------------
  user
-| Field Name| Data Type | Length  | Description                     | Data Content
-| --------- | --------- | ------- | ------------------------------- | -------------------------------------------------------------|
-| userid    | CHAR      | 12      | PK, unique                      | U251009001                                                   |
-| username  | VARCHAR   | 20      | unique                          | budi_warung                                                  |
-| password  | VARCHAR   | 100     | Hash password                   | $2a$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36KZQhOukdGJKbG0lv6K1Ym |
-| name      | VARCHAR   | 50      |                                 | Budi Santoso                                                 |
-| email     | VARCHAR   | 100     |                                 | budi@example.com                                             |
-| phone     | VARCHAR   | 20      |                                 | 08123456789                                                  |
-| whatsapp  | VARCHAR   | 20      |                                 | 08123456789                                                  |
-| createdat | TIMESTAMP | —       |                                 | 2025-09-10 10:00:00                                          |
-| updatedat | TIMESTAMP | —       |                                 | 2025-09-12 15:30:00                                          |
+|  Field Name   | Data Type | Length  | Description                       | Data Content
+| ------------- | --------- | ------- | --------------------------------- | ----------------------------|
+| userid        | CHAR      | 10      | PK, unique                        | U251009001                  |
+| username      | VARCHAR   | 20      | unique                            | budi_warung                 |
+| password      | VARCHAR   | 100     | Hash password                     | $2a$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36KZQhOukdGJKbG0lv6K1Ym
+| name          | VARCHAR   | 50      |                                   | Budi Santoso                |
+| email         | VARCHAR   | 100     |                                   | budi@example.com            |
+| phone         | VARCHAR   | 20      |                                   | 08123456789                 |
+| whatsapp      | VARCHAR   | 20      |                                   | 08123456789                 |
+| updatedat     | TIMESTAMP | —       |                                   | 2025-09-12 15:30:00         |
 
---------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------
  customer
-| Field Name | Data Type    | Length  | Description                  | Data Content
-| ---------- | ------------ | ------- | ---------------------------- |
-| customerid | CHAR         | 10      | PK, unique                   |
-| name       | VARCHAR      | 100     |                              |
-| address    | TEXT         | —       |                              |
-| phone      | VARCHAR      | 20      |                              |
-| whatsapp   | VARCHAR      | 20      |                              |
-| email      | VARCHAR      | 100     |                              |
-| pic        | VARCHAR      | 100     |                              |
-| createdat  | TIMESTAMP    | —       |                              |
-| updatedat  | TIMESTAMP    | —       |                              |
+|   Field Name  | Data Type | Length  | Description                       | Data Content
+| ------------- | ----------| ------- | ----------------------------------|------------------------------
+| customerid    | CHAR      | 10      | PK, unique                        | C251009001                  |
+| name          | VARCHAR   | 100     |                                   |                             |
+| address       | TEXT      | —       |                                   |                             |
+| phone         | VARCHAR   | 20      |                                   |                             |
+| whatsapp      | VARCHAR   | 20      |                                   |                             |
+| email         | VARCHAR   | 100     |                                   |                             |
+| pic           | VARCHAR   | 100     |                                   |                             |
+| updatedat     | TIMESTAMP | —       |                                   |                             |
+
+---------------------------------------------------------------------------------------------------------
+ distributor
+|  Field Name   | Data Type | Length  | Description                       | Data Content
+| ------------- | ----------| ------- | ----------------------------------|------------------------------
+| distributorid | CHAR      | 10      | PK, unique                        | D251009001                  |
+| name          | VARCHAR   | 100     |                                   |                             |
+| address       | TEXT      | —       |                                   |                             |
+| phone         | VARCHAR   | 20      |                                   |                             |
+| whatsapp      | VARCHAR   | 20      |                                   |                             |
+| email         | VARCHAR   | 100     |                                   |                             |
+| pic           | VARCHAR   | 100     |                                   |                             |
+| updatedat     | TIMESTAMP | —       |                                   |                             |
+
+---------------------------------------------------------------------------------------------------------
+item
+| Field Name    | Data Type | Length  | Description                       | Example Data                |
+| ------------- | --------- | ------- | ----------------------------------| --------------------------- |
+| itemid        | CHAR      | 10      | PK, unique                        | I51009001                   |
+| itemname      | VARCHAR   | 100     |                                   | Indomie Goreng              |
+| itemprice     | INT       | —       |                                   | 2500                        |
+| itemstock     | INT       | —       |                                   | 24                          |
+| itemunit      | VARCHAR   | 20      |                                   | pcs / bungkus               |
+| itemcategory  | VARCHAR   | 50      |                                   | Food/NonFood                |
+| updatedat     | TIMESTAMP | —       |                                   | 2025-09-15 11:45:23         |
 
 --------------------------------------------------------------------------------------------------------------------
- supplier
-| Field Name | Data Type    | Length  | Description                  | Data Content
-| ---------- | ------------ | ------- | ---------------------------- |
-| supplierid | CHAR         | 10      | PK, unique                   |
-| name       | VARCHAR      | 100     |                              |
-| address    | TEXT         | —       |                              |
-| phone      | VARCHAR      | 20      |                              |
-| whatsapp   | VARCHAR      | 20      |                              |
-| email      | VARCHAR      | 100     |                              |
-| pic        | VARCHAR      | 100     |                              |
-| createdat  | TIMESTAMP    | —       |                              |
-| updatedat  | TIMESTAMP    | —       |                              |
+purchase
+| Field Name    | Data Type | Length  | Description                       | Example Data                |
+| --------------| --------- | ------- | ----------------------------------| --------------------------- |
+| purchaseid    | CHAR      | 10      | PK, unique                        | P251009001                  |
+| supplierid    | CHAR      | 10      | FK to distributor.distibutor.id   | SUP000001                   |
+| userid        | CHAR      | 10      | FK to user.userid                 | U251009001                  |
+| purchasedate  | DATE      | —       |                                   | 2025-09-15                  |
+| totalitem     | INT       | —       |                                   | 3                           |
+| totalquantity | INT       | —       |                                   | 30                          |
+| totalcost     | INT       | —       |                                   | 150000                      |
+| notes         | TEXT      | —       |                                   | Invoice #123                |
 
---------------------------------------------------------------------------------------------------------------------
-items
-| Field Name    | Data Type | Length | Description                             | Example Data         |
-| ------------- | --------- | ------ | --------------------------------------- | -------------------- |
-| item_id       | CHAR      | 10     | PK, unique                              | 0000001234           |
-| item_name     | VARCHAR   | 100    |                                         | Indomie Goreng       |
-| item_price    | INT       | —      |                                         | 2500                 |
-| item_cost     | INT       | —      |                                         | 2000                 |
-| item stock    | INT       | —      |                                         | 24                   |
-| item_unit     | VARCHAR   | 20     |                                         | pcs or bungkus       |
-| item_category | VARCHAR   | 50     |                                         | Minuman              |
-| is_active     | BOOLEAN   | —      |                                         | TRUE or FALSE        |
-| created_a`    | TIMESTAMP | —      |                                         | 2025-09-15 10:32:00  |
-| updated_at    | TIMESTAMP | —      |                                         | 2025-09-15 11:45:23  |
+---------------------------------------------------------------------------------------------------------
+purchasedetail
+|  Field Name   | Data Type | Length  | Description                       | Example Data                |
+| ------------- | --------- | ------- | ----------------------------------| --------------------------- |
+| purchaseid    | CHAR      | 10      | FK to purchase.purchase.id        | P251009001                  |
+| itemid        | CHAR      | 10      | FK to item.itemid                 |                             |
+| quantity      | INT       | —       |                                   |                             |
+| price         | INT       | —       |                                   |                             |
+| subtotal      | INT       | —       |                                   |                             |
+| notes         | TEXT      | —       |                                   |                             |
 
---------------------------------------------------------------------------------------------------------------------
-input
-| Field Name      | Data Type | Length | Description                            | Example Data        |
-| --------------- | --------- | ------ | -------------------------------------- | ------------------- |
-| inputid         | CHAR      | 12     | PK, unique                             | INP20250915001      |
-| supplierid      | CHAR      | 10     | FK to supplier.supplierid              | SUP000001           |
-| userid          | CHAR      | 12     | FK to `user.userid` (who created it)   | U251009001          |
-| input_date      | DATE      | —      | Date when the transaction occurred     | 2025-09-15          |
-| total_items     | INT       | —      | Total number of different items        | 3                   |
-| total_quantity  | INT       | —      | Total quantity across all items        | 30                  |
-| total_cost      | INT       | —      | Total cost (sum of all item subtotals) | 150000              |
-| notes           | TEXT      | —      | Optional notes (e.g., invoice #)       | Invoice #123        |
-| createdat       | TIMESTAMP | —      | Time of transaction creation           | 2025-09-15 14:00:00 |
-| updatedat       | TIMESTAMP | —      | Time of last update (if any)           | 2025-09-15 14:00:00 |
+---------------------------------------------------------------------------------------------------------
+sales
+| Field Name    | Data Type | Length  | Description                       | Example Data                |
+| ------------- | --------- | ------- | ----------------------------------| --------------------------- |
+| salesid       | CHAR      | 10      | PK, unique                        | S251009001                  |
+| customerid    | CHAR      | 10      | FK to customer.customerid         | C251001001                  |
+| userid        | CHAR      | 10      | FK to user.userid                 | U251009001                  |
+| salesdate     | DATE      | —       |                                   | 2025-09-15                  |
+| totalitem     | INT       | —       |                                   | 3                           |
+| totalquantity | INT       | —       |                                   | 30                          |
+| totalcost     | INT       | —       |                                   | 150000                      |
+| notes         | TEXT      | —       |                                   | Invoice #123                |
 
---------------------------------------------------------------------------------------------------------------------
-input_detail
-| Field Name  | Data Type | Length | Description                                  | Example Data          |
-| ----------- | --------- | ------ | -------------------------------------------- | --------------------- |
-| inputid     | CHAR      | 12     | FK to `input_transaction.inputid`            | `'INP20250915001'`    |
-| detailid    | CHAR      | 14     | ✅ Primary Key – unique ID for each line item | `'INPDTL00000123'`    |
-| item_id    | CHAR      | 10     | FK to `items.item_id`                        | `'0000001234'`        |
-| quantity    | INT       | —      | Quantity of the item added to stock          | `10`                  |
-| cost_price | INT       | —      | Cost price per unit                          | `2000`                |
-| subtotal    | INT       | —      | `quantity * cost_price`                      | `20000`               |
-| notes       | TEXT      | —      | Optional (e.g., batch number, brand)         | `'Batch A1'`          |
-| createdat   | TIMESTAMP | —      | Time the line item was created               | `2025-09-15 14:05:00` |
+---------------------------------------------------------------------------------------------------------
+salesdetail
+|  Field Name   | Data Type | Length  | Description                       | Example Data                |
+| ------------- | --------- | ------- | ----------------------------------| --------------------------- |
+| salesid       | CHAR      | 10      | FK to sales.salesid               | S251009001                  |
+| itemid        | CHAR      | 10      | FK to item.itemid                 |                             |
+| quantity      | INT       | —       |                                   |                             |
+| price         | INT       | —       |                                   |                             |
+| subtotal      | INT       | —       |                                   |                             |
+| notes         | TEXT      | —       |                                   |                             |
+
+---------------------------------------------------------------------------------------------------------
+                                                    PAGES
+---------------------------------------------------------------------------------------------------------
+Login Page
+----------
+- username
+- password
+- login button
+- daftar
+
+Sign Up Page
+------------
+username
+password
+name
+email
+phone
+whatsapp 
+
+Home Page
+---------
+- Data Master (Barang, Supplier, Customer)
+- Data Transaksi (Pembelian, Penjualan)
+- Laporan (Laporan stok barang, Laporan pembelian, Laporan penjualan, Laporan Laba Rugi, Daftar barang, Daftar supplier, Daftar customer)
+- Shortcut to penjualan
+
+Barang
+------
+- buat baru
+- update data
+- hapus data
+
+Pembelian
+---------
+- buat baru
+- hapus data
+
+Penjualan
+---------
+- buat baru
+- hapus data
+
+Laporan stok barang
+-------------------
+filter: nama barang, stok range, kategori
+
+Laporan pembelian
+-----------------
+filter: tanggal, supplier, barang
+
+Laporan penjualan
+-----------------
+filter: tanggal, customer, barang
+
+Laporan laba rugi
+-----------------
+filter: tanggal
+
+Daftar Supplier
+---------------
+filter: name, address, phone, whatsapp, email, pic
+
+Daftar Customer
+---------------
+filter: name, address, phone, whatsapp, email, pic
 
 
-
-
-
-
-
-
-
-
-
---------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
---------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
---------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
---------------------------------------------------------------------------------------------------------------------
-
-Pages
------
-
-
-
-
-
-
-
-
-
-
-
-
+---------------------------------------------------------------------------------------------------------
 Note:
 - penamaan system : English
   tampilan page: Indonesian
+
+---------------------------------------------------------------------------------------------------------
+                                                    CODES
+---------------------------------------------------------------------------------------------------------
+Login Page
+----------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login - Inventory System</title>
+  <style>
+    /* Reset & basics */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body, html {
+      height: 100%;
+      background-color: #d6e6fb; /* soft light blue background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Container box */
+    .login-box {
+      background-color: #ffffff; /* white */
+      padding: 2rem 3rem;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(105, 140, 220, 0.3);
+      width: 320px;
+    }
+
+    /* Title */
+    .login-box h2 {
+      text-align: center;
+      margin-bottom: 1.8rem;
+      color: #5a7ddb; /* soft blue */
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    /* Input groups */
+    .input-group {
+      margin-bottom: 1.2rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-size: 0.9rem;
+      color: #7b8dbd; /* light grey-blue */
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 0.6rem 0.8rem;
+      border: 1.5px solid #b0c1e8; /* light grey-blue border */
+      border-radius: 6px;
+      font-size: 1rem;
+      background-color: #f5faff; /* very light blue */
+      transition: border-color 0.3s, box-shadow 0.3s;
+      color: #2a3a62;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      outline: none;
+      border-color: #6a88d6; /* stronger blue on focus */
+      box-shadow: 0 0 8px rgba(106, 136, 214, 0.6);
+      background-color: #ffffff;
+    }
+
+    /* Button */
+    button {
+      width: 100%;
+      padding: 0.7rem;
+      background-color: #6a88d6; /* soft blue */
+      border: none;
+      border-radius: 7px;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 10px rgba(106, 136, 214, 0.5);
+    }
+
+    button:hover {
+      background-color: #5776c1;
+      box-shadow: 0 6px 14px rgba(87, 118, 193, 0.7);
+    }
+
+    /* Signup link */
+    .signup-link {
+      margin-top: 1.3rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #5a7ddb;
+      user-select: none;
+    }
+
+    .signup-link a {
+      color: #7b8dbd;
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 5px;
+      transition: color 0.3s;
+    }
+
+    .signup-link a:hover {
+      color: #4560a7;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>Login</h2>
+    <form>
+      <div class="input-group">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          maxlength="20"
+          required
+          autocomplete="username"
+          placeholder="Enter your username"
+        />
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          maxlength="100"
+          required
+          autocomplete="current-password"
+          placeholder="Enter your password"
+        />
+      </div>
+      <button type="submit">Login</button>
+    </form>
+    <div class="signup-link">
+      Don't have an account?
+      <a href="#">Sign up</a>
+    </div>
+  </div>
+</body>
+</html>
+
+
+Sign Up Page
+------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign Up - Inventory System</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body, html {
+      height: 100%;
+      background-color: #d6e6fb; /* soft light blue */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .signup-box {
+      background-color: #ffffff; /* white */
+      padding: 2rem 3rem;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(105, 140, 220, 0.3);
+      width: 360px;
+    }
+    .signup-box h2 {
+      text-align: center;
+      margin-bottom: 1.8rem;
+      color: #5a7ddb; /* soft blue */
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .input-group {
+      margin-bottom: 1.2rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-size: 0.9rem;
+      color: #7b8dbd; /* light grey-blue */
+    }
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="tel"] {
+      width: 100%;
+      padding: 0.6rem 0.8rem;
+      border: 1.5px solid #b0c1e8; /* light grey-blue border */
+      border-radius: 6px;
+      font-size: 1rem;
+      background-color: #f5faff; /* very light blue */
+      transition: border-color 0.3s, box-shadow 0.3s;
+      color: #2a3a62;
+    }
+    input[type="text"]:focus,
+    input[type="password"]:focus,
+    input[type="email"]:focus,
+    input[type="tel"]:focus {
+      outline: none;
+      border-color: #6a88d6; /* stronger blue on focus */
+      box-shadow: 0 0 8px rgba(106, 136, 214, 0.6);
+      background-color: #ffffff;
+    }
+    button {
+      width: 100%;
+      padding: 0.7rem;
+      background-color: #6a88d6; /* soft blue */
+      border: none;
+      border-radius: 7px;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 10px rgba(106, 136, 214, 0.5);
+    }
+    button:hover {
+      background-color: #5776c1;
+      box-shadow: 0 6px 14px rgba(87, 118, 193, 0.7);
+    }
+    .login-link {
+      margin-top: 1.3rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #5a7ddb;
+      user-select: none;
+    }
+    .login-link a {
+      color: #7b8dbd;
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 5px;
+      transition: color 0.3s;
+    }
+    .login-link a:hover {
+      color: #4560a7;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-box">
+    <h2>Sign Up</h2>
+    <form>
+      <div class="input-group">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          maxlength="20"
+          required
+          autocomplete="username"
+          placeholder="Choose a username"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          maxlength="100"
+          required
+          autocomplete="new-password"
+          placeholder="Create a password"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          maxlength="50"
+          required
+          autocomplete="name"
+          placeholder="Your full name"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          maxlength="100"
+          required
+          autocomplete="email"
+          placeholder="you@example.com"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="phone">Phone</label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          maxlength="20"
+          pattern="[0-9+\-\s()]{7,20}"
+          placeholder="+1 234 567 8900"
+          autocomplete="tel"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="whatsapp">WhatsApp</label>
+        <input
+          type="tel"
+          id="whatsapp"
+          name="whatsapp"
+          maxlength="20"
+          pattern="[0-9+\-\s()]{7,20}"
+          placeholder="+1 234 567 8900"
+          autocomplete="tel"
+        />
+      </div>
+
+      <button type="submit">Create Account</button>
+    </form>
+    <div class="login-link">
+      Already have an account?
+      <a href="#">Login</a>
+    </div>
+  </div>
+</body>
+</html>
+
+
+Home Page
+---------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Home - Inventory System</title>
+  <style>
+    /* Reset & basics */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background-color: #d6e6fb; /* soft light blue */
+      min-height: 100vh;
+      color: #2a3a62;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    /* NAVBAR */
+    nav {
+      background-color: #6a88d6; /* soft blue */
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      height: 60px;
+      box-shadow: 0 2px 8px rgba(50, 81, 168, 0.3);
+      user-select: none;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    /* Left side container for logo + menu */
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    /* Logo */
+    .logo {
+      font-weight: 700;
+      font-size: 1.4rem;
+      cursor: default;
+      letter-spacing: 1.2px;
+      color: #f0f5ff;
+      user-select: text;
+    }
+
+    /* Menu container */
+    .menu {
+      display: flex;
+      gap: 1.8rem;
+      align-items: center;
+    }
+
+    /* Dropdown container */
+    .dropdown {
+      position: relative;
+    }
+
+    /* Dropdown button */
+    .dropbtn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0.5rem 0;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .dropbtn:hover,
+    .dropbtn:focus {
+      color: #c3d0f9;
+      outline: none;
+    }
+
+    /* Dropdown content */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #ffffff;
+      min-width: 190px;
+      box-shadow: 0 8px 16px rgba(105, 140, 220, 0.25);
+      border-radius: 8px;
+      top: 38px;
+      left: 0;
+      z-index: 10;
+      padding: 0.5rem 0;
+    }
+
+    /* Show dropdown on hover */
+    .dropdown:hover .dropdown-content,
+    .dropdown:focus-within .dropdown-content {
+      display: block;
+    }
+
+    /* Dropdown items */
+    .dropdown-content button {
+      background: none;
+      border: none;
+      width: 100%;
+      padding: 0.6rem 1.4rem;
+      text-align: left;
+      color: #2a3a62;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background-color 0.25s ease;
+      user-select: none;
+    }
+
+    .dropdown-content button:hover,
+    .dropdown-content button:focus {
+      background-color: #e3eaff;
+      outline: none;
+    }
+
+    /* User area */
+    .user-area {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      user-select: none;
+    }
+
+    /* User icon */
+    .user-icon {
+      background-color: #4a64b7;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      cursor: default;
+      user-select: text;
+      box-shadow: 0 0 6px rgba(66, 103, 167, 0.8);
+    }
+
+    /* Sign out button */
+    .signout-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: white;
+      font-size: 1.3rem;
+      transition: color 0.3s ease;
+      user-select: none;
+    }
+    .signout-btn:hover {
+      color: #c3d0f9;
+    }
+
+    /* MAIN CONTENT */
+    main {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+
+    /* Shortcut button */
+    .shortcut {
+      background-color: #6a88d6;
+      color: white;
+      text-align: center;
+      border-radius: 10px;
+      padding: 2rem 3rem;
+      font-size: 1.6rem;
+      font-weight: 700;
+      box-shadow: 0 6px 18px rgba(106, 136, 214, 0.5);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      cursor: pointer;
+      border: none;
+    }
+
+    .shortcut:hover {
+      background-color: #5776c1;
+      box-shadow: 0 8px 25px rgba(87, 118, 193, 0.7);
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 600px) {
+      nav {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 1rem;
+        gap: 1rem;
+      }
+      .menu {
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        width: 100%;
+      }
+      .user-area {
+        width: 100%;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-left">
+      <div class="logo">InvSys</div>
+      <div class="menu">
+        <div class="dropdown" tabindex="0">
+          <button class="dropbtn">Data Master ▼</button>
+          <div class="dropdown-content" role="menu" aria-label="Data Master submenu">
+            <button onclick="alert('Go to Barang')">Barang</button>
+            <button onclick="alert('Go to Supplier')">Supplier</button>
+            <button onclick="alert('Go to Customer')">Customer</button>
+          </div>
+        </div>
+        <div class="dropdown" tabindex="0">
+          <button class="dropbtn">Data Transaksi ▼</button>
+          <div class="dropdown-content" role="menu" aria-label="Data Transaksi submenu">
+            <button onclick="alert('Go to Pembelian')">Pembelian</button>
+            <button onclick="alert('Go to Penjualan')">Penjualan</button>
+          </div>
+        </div>
+        <div class="dropdown" tabindex="0">
+          <button class="dropbtn">Laporan ▼</button>
+          <div class="dropdown-content" role="menu" aria-label="Laporan submenu">
+            <button onclick="alert('Go to Laporan Stok Barang')">Laporan Stok Barang</button>
+            <button onclick="alert('Go to Laporan Pembelian')">Laporan Pembelian</button>
+            <button onclick="alert('Go to Laporan Penjualan')">Laporan Penjualan</button>
+            <button onclick="alert('Go to Laporan Laba Rugi')">Laporan Laba Rugi</button>
+            <button onclick="alert('Go to Daftar Barang')">Daftar Barang</button>
+            <button onclick="alert('Go to Daftar Supplier')">Daftar Supplier</button>
+            <button onclick="alert('Go to Daftar Customer')">Daftar Customer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="user-area">
+      <div class="user-icon" title="User: Budi Santoso">BS</div>
+      <button class="signout-btn" title="Sign Out" aria-label="Sign Out" onclick="alert('Signing out...')">
+        🔒
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <button class="shortcut" onclick="alert('Shortcut to Penjualan (Cashier)')">
+      Shortcut to Penjualan (Cashier)
+    </button>
+  </main>
+</body>
+</html>
+
+Barang
+------
+
+Pembelian
+---------
+- buat baru
+- hapus data
+
+Penjualan
+---------
+- buat baru
+- hapus data
+
+Laporan stok barang
+-------------------
+filter: nama barang, stok range, kategori
+
+Laporan pembelian
+-----------------
+filter: tanggal, supplier, barang
+
+Laporan penjualan
+-----------------
+filter: tanggal, customer, barang
+
+Laporan laba rugi
+-----------------
+filter: tanggal
+
+Daftar Supplier
+---------------
+filter: name, address, phone, whatsapp, email, pic
+
+Daftar Customer
+---------------
+filter: name, address, phone, whatsapp, email, pic
