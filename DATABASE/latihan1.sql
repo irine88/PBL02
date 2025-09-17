@@ -105,13 +105,50 @@ alter table siswa
 	add foreign key (kd_kota)
     references kota(kode);
 
-select siswa.nama, siswa.alamat, kota.namakota
-from siswa, kota
-where siswa.kd_kota = kota.kode
-order by siswa.nisi;
+-- select siswa.nama, siswa.alamat, kota.namakota
+-- from siswa, kota
+-- where siswa.kd_kota = kota.kode
+-- order by siswa.nisi;
 
+-- select kota.namakota, count(kota.namakota) as Jumlah_Siswa
+-- from siswa, kota
+-- where siswa.kd_kota = kota.kode and
+-- 	kota.namakota = 'Bandung'
+-- group by kota.namakota;
+
+
+create view vw_jmlsiswa_kota as
 select kota.namakota, count(kota.namakota) as Jumlah_Siswa
 from siswa, kota
-where siswa.kd_kota = kota.kode and
-	kota.namakota = 'Bandung'
-group by kota.namakota;
+where siswa.kd_kota = kota.kode -- and
+	-- kota.namakota = 'Bandung'
+    group by kota.namakota;
+
+describe siswa;
+
+select *
+from vw_jmlsiswa_kota
+where namakota = 'Bandung';
+
+DELIMITER //
+CREATE PROCEDURE sp_jmlsiswa_by_kota(
+	sp_nama varchar(25)
+)
+
+BEGIN
+	select *
+    from vw_jmlsiswa_kota
+    where namakota = sp_nama;
+END//
+DELIMITER ;
+
+call sp_jmlsiswa_by_kota('Bandung');
+call sp_jmlsiswa_by_kota('Surabaya');
+call sp_jmlsiswa_by_kota('Jakarta');
+
+insert siswa values ('7890123456', 'Anto', 'Ancol', '3');
+insert siswa values ('8901234567', 'Nela', 'Lebak Bulus', '3');
+
+call sp_ins_kota('4', 'Semarang');
+insert siswa values ('9012345678', 'Nita', 'Kopo', '1');
+
