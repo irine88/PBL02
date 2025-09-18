@@ -8,7 +8,7 @@ create table gender (
 );
 
 create table kota (
-	kodekota char(1) primary key,
+	kodekota char(3) primary key,
     kota varchar(20)
 );
 
@@ -17,7 +17,7 @@ create table pelanggan (
     namapelanggan varchar(20),
     kodegender char(1),
     alamat varchar(100),
-    kodekota char(1),
+    kodekota char(3),
     foreign key (kodegender) references gender(kodegender)
 		on delete restrict on update cascade,
 	foreign key (kodekota) references kota(kodekota)
@@ -72,7 +72,7 @@ call insertgender('2', 'Wanita');
 
 DELIMITER //
 create procedure insertkota (
-	in p_kodekota char(1),
+	in p_kodekota char(3),
     in p_kota varchar(20)
 )
 BEGIN
@@ -80,9 +80,9 @@ BEGIN
 		values (p_kodekota, p_kota);
 END //
 DELIMITER ;
-call insertkota('1', 'Jakarta');
-call insertkota('2', 'Bandung');
-call insertkota('3', 'Surabaya');
+call insertkota('JKT', 'Jakarta');
+call insertkota('BDG', 'Bandung');
+call insertkota('SBY', 'Surabaya');
 
 DELIMITER //
 create procedure insertpelanggan (
@@ -90,20 +90,20 @@ create procedure insertpelanggan (
     in p_namapelanggan varchar(20),
     in p_kodegender char(1),
     in p_alamat varchar(100),
-    in p_kodekota char(1)
+    in p_kodekota char(3)
 )
 BEGIN
 	insert into pelanggan(kodepelanggan, namapelanggan, kodegender, alamat, kodekota)
 		values (p_kodepelanggan, p_namapelanggan, p_kodegender, p_alamat, p_kodekota);
 END //
 DELIMITER ;
-call insertpelanggan('PLG01', 'Mohamad', '1', 'Priok', '1');
-call insertpelanggan('PLG02', 'Naufal', '1', 'Cilincing', '1');
-call insertpelanggan('PLG03', 'Atila', '1', 'Bojongsoang', '2');
-call insertpelanggan('PLG04', 'Tsalsa', '2', 'Buah Batu', '2');
-call insertpelanggan('PLG05', 'Damay', '2', 'Gubeng', '3');
-call insertpelanggan('PLG06', 'Tsaniy', '1', 'Darmo', '3');
-call insertpelanggan('PLG07', 'Nabila', '2', 'Lebak Bulus', '1');
+call insertpelanggan('PLG01', 'Mohamad', '1', 'Priok', 'JKT');
+call insertpelanggan('PLG02', 'Naufal', '1', 'Cilincing', 'JKT');
+call insertpelanggan('PLG03', 'Atila', '1', 'Bojongsoang', 'BDG');
+call insertpelanggan('PLG04', 'Tsalsa', '2', 'Buah Batu', 'BDG');
+call insertpelanggan('PLG05', 'Damay', '2', 'Gubeng', 'SBY');
+call insertpelanggan('PLG06', 'Tsaniy', '1', 'Darmo', 'SBY');
+call insertpelanggan('PLG07', 'Nabila', '2', 'Lebak Bulus', 'JKT');
 
 DELIMITER //
 create procedure insertsatuan (
@@ -220,7 +220,71 @@ join pelanggan on penjualan.kodepelanggan = pelanggan.kodepelanggan
 join produk on detailpenjualan.kodeproduk = produk.kodeproduk
 order by penjualan.kodepenjualan;
 
+DELIMITER //
+create function hitungsubtotal(jumlah int, harga int)
+returns int
+deterministic
+BEGIN
+	return jumlah * harga;
+END //
+DELIMITER ;
+
+create view vw_all as
+select
+    j.kodepenjualan as 'No Jual',
+    DATE_FORMAT(j.tanggalpenjualan, '%d/%m/%Y') as 'Tanggal Jual',
+	n.kodepelanggan as 'Kode Pelanggan',
+    n.namapelanggan as 'Nama Pelanggan',
+    g.gender as 'Gender',
+    n.alamat as 'Alamat',
+    k.kota as 'Kota',
+    dj.kodeproduk as 'Kode Produk',
+    p.namaproduk as 'Produk',
+    s.satuan as 'Satuan',
+    dj.jumlah as 'Jumlah',
+    p.harga as 'Harga',
+    hitungsubtotal(dj.jumlah, p.harga) as 'Subtotal'
+from penjualan j
+join detailpenjualan dj on dj.kodepenjualan = j.kodepenjualan
+join pelanggan n on j.kodepelanggan = n.kodepelanggan
+join produk p on dj.kodeproduk = p.kodeproduk
+join gender g on n.kodegender = g.kodegender
+join kota k on n.kodekota = k.kodekota
+join satuan s on p.kodesatuan = s.kodesatuan
+order by j.kodepenjualan, j.tanggalpenjualan;
+
+DELIMITER //
+create procedure cari_penjualan (in p_nama varchar(20))
+BEGIN
+	select 
+		p.kodepenjualan AS 'No Jual',
+        DATE_FORMAT(p.tanggalpenjualan, '%d/%m/%Y') AS 'Tanggal Jual',
+        pl.namapelanggan AS 'Nama Pelanggan',
+        pr.namaproduk AS 'Produk',
+        dp.jumlah AS 'Jumlah'
+    FROM penjualan p
+    JOIN pelanggan pl ON p.kodepelanggan = pl.kodepelanggan
+    JOIN detailpenjualan dp ON p.kodepenjualan = dp.kodepenjualan
+    JOIN produk pr ON dp.kodeproduk = pr.kodeproduk
+    WHERE pl.namapelanggan LIKE CONCAT('%', p_nama, '%')
+    ORDER BY p.tanggalpenjualan;
+END //
+DELIMITER ;
+
+create view vw_harian as
+select
+	penjualan.tanggalpenjualan as 'Tanggal',
+    sum(hitungsubtotal(detailpenjualan.jumlah, produk.harga)) as 'Total Pejualan Harian'
+from penjualan
+join detailpenjualan on penjualan.kodepenjualan = detailpenjualan.kodepenjualan
+join produk on detailpenjualan.kodeproduk = produk.kodeproduk
+group by penjualan.tanggalpenjualan;
+
+
+
 select * from vw_pelanggan;
 select * from vw_produk;
 select * from vw_penjualan;
-
+select * from vw_all;
+select * from vw_harian;
+CALL cari_penjualan('na');

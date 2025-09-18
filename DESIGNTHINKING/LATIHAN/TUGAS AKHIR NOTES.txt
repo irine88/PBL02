@@ -16,20 +16,20 @@ RapiToko – Aplikasi Web untuk Pengelolaan Stok Barang dan Keuangan Warung UMKM
 | phone         | VARCHAR   | 20      |                                   | 08123456789                 |
 | whatsapp      | VARCHAR   | 20      |                                   | 08123456789                 |
 | userlevel     | CHAR      | 1       |                                   | 1: owner; 2: admin; 3: kasir|
-| updatedat     | TIMESTAMP | —       |                                   | 2025-09-12 15:30:00         |
+| updatedat     | DATE      | —       |                                   | 2025-09-12         |
 
 ---------------------------------------------------------------------------------------------------------
  customer
 |   Field Name  | Data Type | Length  | Description                       | Data Content
 | ------------- | ----------| ------- | ----------------------------------|------------------------------
 | customerid    | CHAR      | 10      | PK, unique                        | C251009001                  |
-| name          | VARCHAR   | 100     |                                   |                             |
-| address       | TEXT      | —       |                                   |                             |
-| phone         | VARCHAR   | 20      |                                   |                             |
-| whatsapp      | VARCHAR   | 20      |                                   |                             |
-| email         | VARCHAR   | 100     |                                   |                             |
-| pic           | VARCHAR   | 100     |                                   |                             |
-| updatedat     | TIMESTAMP | —       |                                   |                             |
+| name          | VARCHAR   | 100     |                                   | Customer Grosir             |
+| address       | TEXT      | —       |                                   | Taman Kopo                  |
+| phone         | VARCHAR   | 20      |                                   | 022 60123456                |
+| whatsapp      | VARCHAR   | 20      |                                   | 081234567890                |
+| email         | VARCHAR   | 100     |                                   | helo@gmail.com              |
+| pic           | VARCHAR   | 100     |                                   | Erika                       |
+| updatedat     | DATE      | —       |                                   | 2025-09-19                            |
 
 ---------------------------------------------------------------------------------------------------------
  distributor
@@ -42,7 +42,7 @@ RapiToko – Aplikasi Web untuk Pengelolaan Stok Barang dan Keuangan Warung UMKM
 | whatsapp      | VARCHAR   | 20      |                                   |                             |
 | email         | VARCHAR   | 100     |                                   |                             |
 | pic           | VARCHAR   | 100     |                                   |                             |
-| updatedat     | TIMESTAMP | —       |                                   |                             |
+| updatedat     | DATE      | —       |                                   |                             |
 
 ---------------------------------------------------------------------------------------------------------
 item
@@ -54,7 +54,7 @@ item
 | itemstock     | INT       | —       |                                   | 24                          |
 | itemunit      | VARCHAR   | 20      |                                   | pcs / bungkus               |
 | itemcategory  | VARCHAR   | 50      |                                   | Food/NonFood                |
-| updatedat     | TIMESTAMP | —       |                                   | 2025-09-15 11:45:23         |
+| updatedat     | DATE      | —       |                                   | 2025-09-15 11:45:23         |
 
 --------------------------------------------------------------------------------------------------------------------
 purchase
