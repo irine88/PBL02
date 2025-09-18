@@ -3,7 +3,7 @@ Break down Tugas Akhir
 
 RapiToko – Aplikasi Web untuk Pengelolaan Stok Barang dan Keuangan Warung UMKM
 ---------------------------------------------------------------------------------------------------------
-                                               DATABASE / TABLES
+                                              DATABASE / TABLES
 ---------------------------------------------------------------------------------------------------------
  user
 |  Field Name   | Data Type | Length  | Description                       | Data Content
@@ -15,6 +15,7 @@ RapiToko – Aplikasi Web untuk Pengelolaan Stok Barang dan Keuangan Warung UMKM
 | email         | VARCHAR   | 100     |                                   | budi@example.com            |
 | phone         | VARCHAR   | 20      |                                   | 08123456789                 |
 | whatsapp      | VARCHAR   | 20      |                                   | 08123456789                 |
+| userlevel     | CHAR      | 1       |                                   | 1: owner; 2: admin; 3: kasir|
 | updatedat     | TIMESTAMP | —       |                                   | 2025-09-12 15:30:00         |
 
 ---------------------------------------------------------------------------------------------------------
@@ -49,7 +50,7 @@ item
 | ------------- | --------- | ------- | ----------------------------------| --------------------------- |
 | itemid        | CHAR      | 10      | PK, unique                        | I51009001                   |
 | itemname      | VARCHAR   | 100     |                                   | Indomie Goreng              |
-| itemprice     | INT       | —       |                                   | 2500                        |
+| itemsellprice | INT       | —       |                                   | 2500                        |
 | itemstock     | INT       | —       |                                   | 24                          |
 | itemunit      | VARCHAR   | 20      |                                   | pcs / bungkus               |
 | itemcategory  | VARCHAR   | 50      |                                   | Food/NonFood                |
@@ -63,9 +64,6 @@ purchase
 | supplierid    | CHAR      | 10      | FK to distributor.distibutor.id   | SUP000001                   |
 | userid        | CHAR      | 10      | FK to user.userid                 | U251009001                  |
 | purchasedate  | DATE      | —       |                                   | 2025-09-15                  |
-| totalitem     | INT       | —       |                                   | 3                           |
-| totalquantity | INT       | —       |                                   | 30                          |
-| totalcost     | INT       | —       |                                   | 150000                      |
 | notes         | TEXT      | —       |                                   | Invoice #123                |
 
 ---------------------------------------------------------------------------------------------------------
@@ -75,9 +73,7 @@ purchasedetail
 | purchaseid    | CHAR      | 10      | FK to purchase.purchase.id        | P251009001                  |
 | itemid        | CHAR      | 10      | FK to item.itemid                 |                             |
 | quantity      | INT       | —       |                                   |                             |
-| price         | INT       | —       |                                   |                             |
-| subtotal      | INT       | —       |                                   |                             |
-| notes         | TEXT      | —       |                                   |                             |
+| buyprice      | INT       | —       |                                   |                             |
 
 ---------------------------------------------------------------------------------------------------------
 sales
@@ -87,9 +83,6 @@ sales
 | customerid    | CHAR      | 10      | FK to customer.customerid         | C251001001                  |
 | userid        | CHAR      | 10      | FK to user.userid                 | U251009001                  |
 | salesdate     | DATE      | —       |                                   | 2025-09-15                  |
-| totalitem     | INT       | —       |                                   | 3                           |
-| totalquantity | INT       | —       |                                   | 30                          |
-| totalcost     | INT       | —       |                                   | 150000                      |
 | notes         | TEXT      | —       |                                   | Invoice #123                |
 
 ---------------------------------------------------------------------------------------------------------
@@ -99,9 +92,7 @@ salesdetail
 | salesid       | CHAR      | 10      | FK to sales.salesid               | S251009001                  |
 | itemid        | CHAR      | 10      | FK to item.itemid                 |                             |
 | quantity      | INT       | —       |                                   |                             |
-| price         | INT       | —       |                                   |                             |
-| subtotal      | INT       | —       |                                   |                             |
-| notes         | TEXT      | —       |                                   |                             |
+| sellprice     | INT       | —       |                                   |                             |
 
 ---------------------------------------------------------------------------------------------------------
                                                     PAGES
