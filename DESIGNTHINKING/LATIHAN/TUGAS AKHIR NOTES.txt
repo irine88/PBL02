@@ -16,7 +16,7 @@ RapiToko – Aplikasi Web untuk Pengelolaan Stok Barang dan Keuangan Warung UMKM
 | phone         | VARCHAR   | 20      |                                   | 08123456789                 |
 | whatsapp      | VARCHAR   | 20      |                                   | 08123456789                 |
 | userlevel     | CHAR      | 1       |                                   | 1: owner; 2: admin; 3: kasir|
-| updatedat     | DATE      | —       |                                   | 2025-09-12         |
+| updatedat     | DATE      | —       |                                   | 2025-09-12                  |
 
 ---------------------------------------------------------------------------------------------------------
  customer
@@ -29,20 +29,20 @@ RapiToko – Aplikasi Web untuk Pengelolaan Stok Barang dan Keuangan Warung UMKM
 | whatsapp      | VARCHAR   | 20      |                                   | 081234567890                |
 | email         | VARCHAR   | 100     |                                   | helo@gmail.com              |
 | pic           | VARCHAR   | 100     |                                   | Erika                       |
-| updatedat     | DATE      | —       |                                   | 2025-09-19                            |
+| updatedat     | DATE      | —       |                                   | 2025-09-19                  |
 
 ---------------------------------------------------------------------------------------------------------
  distributor
 |  Field Name   | Data Type | Length  | Description                       | Data Content
 | ------------- | ----------| ------- | ----------------------------------|------------------------------
 | distributorid | CHAR      | 10      | PK, unique                        | D251009001                  |
-| name          | VARCHAR   | 100     |                                   |                             |
-| address       | TEXT      | —       |                                   |                             |
-| phone         | VARCHAR   | 20      |                                   |                             |
-| whatsapp      | VARCHAR   | 20      |                                   |                             |
-| email         | VARCHAR   | 100     |                                   |                             |
-| pic           | VARCHAR   | 100     |                                   |                             |
-| updatedat     | DATE      | —       |                                   |                             |
+| name          | VARCHAR   | 100     |                                   | Supplier Besar              |
+| address       | TEXT      | —       |                                   | Cibaduyut                   |
+| phone         | VARCHAR   | 20      |                                   | 021 601234567               |
+| whatsapp      | VARCHAR   | 20      |                                   | 0899123456789               |
+| email         | VARCHAR   | 100     |                                   | dist@gmail.com              |
+| pic           | VARCHAR   | 100     |                                   | Emon                        |
+| updatedat     | DATE      | —       |                                   | 2025-09-19                            |
 
 ---------------------------------------------------------------------------------------------------------
 item
@@ -52,9 +52,9 @@ item
 | itemname      | VARCHAR   | 100     |                                   | Indomie Goreng              |
 | itemsellprice | INT       | —       |                                   | 2500                        |
 | itemstock     | INT       | —       |                                   | 24                          |
-| itemunit      | VARCHAR   | 20      |                                   | pcs / bungkus               |
+| itemunit      | VARCHAR   | 20      |                                   | pcs/bungkus/pak             |
 | itemcategory  | VARCHAR   | 50      |                                   | Food/NonFood                |
-| updatedat     | DATE      | —       |                                   | 2025-09-15 11:45:23         |
+| updatedat     | DATE      | —       |                                   | 2025-09-15                  |
 
 --------------------------------------------------------------------------------------------------------------------
 purchase
