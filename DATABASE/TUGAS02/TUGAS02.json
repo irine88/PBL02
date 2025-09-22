@@ -1,0 +1,27 @@
+{
+  "type": "Compass Connections",
+  "version": {
+    "$numberInt": "1"
+  },
+  "connections": [
+    {
+      "id": "92df448e-6344-492d-aa93-b1b11e7f64f8",
+      "lastUsed": {
+        "$date": {
+          "$numberLong": "1758266800812"
+        }
+      },
+      "favorite": {
+        "name": "irine",
+        "color": "color7"
+      },
+      "savedConnectionType": "recent",
+      "connectionOptions": {
+        "connectionString": "mongodb://localhost:27017/",
+        "oidc": {
+          "serializedState": "eyJvaWRjUGx1Z2luU3RhdGVWZXJzaW9uIjoxLCJzdGF0ZSI6W119"
+        }
+      }
+    }
+  ]
+}
