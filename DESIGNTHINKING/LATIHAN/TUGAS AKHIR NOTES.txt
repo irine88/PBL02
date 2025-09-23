@@ -2,49 +2,55 @@ Break down Tugas Akhir
 
 
 RapiToko – Aplikasi Web untuk Pengelolaan Stok Barang dan Keuangan Warung UMKM
----------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
                                               DATABASE / TABLES
----------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
  user
 |  Field Name   | Data Type | Length  | Description                       | Data Content
 | ------------- | --------- | ------- | --------------------------------- | ----------------------------|
 | userid        | CHAR      | 10      | PK, unique                        | U251009001                  |
 | username      | VARCHAR   | 20      | unique                            | budi_warung                 |
 | password      | VARCHAR   | 100     | Hash password                     | $2a$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36KZQhOukdGJKbG0lv6K1Ym
-| name          | VARCHAR   | 50      |                                   | Budi Santoso                |
-| email         | VARCHAR   | 100     |                                   | budi@example.com            |
-| phone         | VARCHAR   | 20      |                                   | 08123456789                 |
-| whatsapp      | VARCHAR   | 20      |                                   | 08123456789                 |
-| userlevel     | CHAR      | 1       |                                   | 1: owner; 2: admin; 3: kasir|
-| updatedat     | DATE      | —       |                                   | 2025-09-12                  |
+| nameofuser    | VARCHAR   | 50      |                                   | Budi Santoso                |
+| useremail     | VARCHAR   | 100     |                                   | budi@example.com            |
+| userphone     | VARCHAR   | 20      |                                   | 08123456789                 |
+| userwhatsapp  | VARCHAR   | 20      |                                   | 08123456789                 |
+| userlevel     | CHAR      | 1       |                                   | 1 / 2 / 3 / 4               |
+| userupdatedat | DATE      | —       |                                   | 2025-09-12                  |
 
----------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
+ userlevel
+|  Field Name   | Data Type | Length  | Description                       | Data Content
+| ------------- | --------- | ------- | --------------------------------- | ----------------------------|
+| userlevel     | CHAR      | 1       | PK                                | 1: Owner; 2: Administrator; |
+| level         | VARCHAR   | 20      | unique                            | 3: Cashier; 4: Guest        |
+--------------------------------------------------------------------------------------------------------
  customer
 |   Field Name  | Data Type | Length  | Description                       | Data Content
-| ------------- | ----------| ------- | ----------------------------------|------------------------------
+| ------------- | ----------| ------- | ----------------------------------|-----------------------------
 | customerid    | CHAR      | 10      | PK, unique                        | C251009001                  |
-| name          | VARCHAR   | 100     |                                   | Customer Grosir             |
-| address       | TEXT      | —       |                                   | Taman Kopo                  |
-| phone         | VARCHAR   | 20      |                                   | 022 60123456                |
-| whatsapp      | VARCHAR   | 20      |                                   | 081234567890                |
-| email         | VARCHAR   | 100     |                                   | helo@gmail.com              |
-| pic           | VARCHAR   | 100     |                                   | Erika                       |
-| updatedat     | DATE      | —       |                                   | 2025-09-19                  |
+| customername  | VARCHAR   | 100     |                                   | Customer Grosir             |
+| customeraddress TEXT      | —       |                                   | Taman Kopo                  |
+| customerphone | VARCHAR   | 20      |                                   | 022 60123456                |
+| customerwhatsapp VARCHAR  | 20      |                                   | 081234567890                |
+| customeremail | VARCHAR   | 100     |                                   | helo@gmail.com              |
+| customerpic   | VARCHAR   | 100     |                                   | Erika                       |
+| customerupdatedat DATE    | —       |                                   | 2025-09-19                  |
 
----------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
  distributor
 |  Field Name   | Data Type | Length  | Description                       | Data Content
-| ------------- | ----------| ------- | ----------------------------------|------------------------------
+| ------------- | ----------| ------- | ----------------------------------|-----------------------------
 | distributorid | CHAR      | 10      | PK, unique                        | D251009001                  |
-| name          | VARCHAR   | 100     |                                   | Supplier Besar              |
-| address       | TEXT      | —       |                                   | Cibaduyut                   |
-| phone         | VARCHAR   | 20      |                                   | 021 601234567               |
-| whatsapp      | VARCHAR   | 20      |                                   | 0899123456789               |
-| email         | VARCHAR   | 100     |                                   | dist@gmail.com              |
-| pic           | VARCHAR   | 100     |                                   | Emon                        |
-| updatedat     | DATE      | —       |                                   | 2025-09-19                            |
+| distributorname VARCHAR   | 100     |                                   | Supplier Besar              |
+| distributoraddress TEXT   | —       |                                   | Cibaduyut                   |
+| distributorphone VARCHAR  | 20      |                                   | 021 601234567               |
+| distributorwhatsapp VARCHAR 20      |                                   | 0899123456789               |
+| distributoremail VARCHAR  | 100     |                                   | dist@gmail.com              |
+| distributorpic| VARCHAR   | 100     |                                   | Emon                        |
+| distributorupdatedat DATE | —       |                                   | 2025-09-19                  |
 
----------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
 item
 | Field Name    | Data Type | Length  | Description                       | Example Data                |
 | ------------- | --------- | ------- | ----------------------------------| --------------------------- |
@@ -52,30 +58,44 @@ item
 | itemname      | VARCHAR   | 100     |                                   | Indomie Goreng              |
 | itemsellprice | INT       | —       |                                   | 2500                        |
 | itemstock     | INT       | —       |                                   | 24                          |
-| itemunit      | VARCHAR   | 20      |                                   | pcs/bungkus/pak             |
-| itemcategory  | VARCHAR   | 50      |                                   | Food/NonFood                |
+| itemunit      | CHAR      | 1       |                                   | pcs/bungkus/pak             |
+| itemcategory  | CHAR      | 1       |                                   | Food/NonFood                |
 | updatedat     | DATE      | —       |                                   | 2025-09-15                  |
 
---------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
+itemunit
+| Field Name    | Data Type | Length  | Description                       | Example Data                |
+| ------------- | --------- | ------- | ----------------------------------| --------------------------- |
+| itemunit      | CHAR      | 1       | PK, unique                        | 1: pc; 2: pak; 3: kg        |
+| unit          | VARCHAR   | 20      |                                   |                             |
+
+--------------------------------------------------------------------------------------------------------
+itemcategory
+| Field Name    | Data Type | Length  | Description                       | Example Data                |
+| ------------- | --------- | ------- | ----------------------------------| --------------------------- |
+| itemcategory  | CHAR      | 1       | PK, unique                        | 1: food; 2: nonfood         |
+| category      | VARCHAR   | 20      |                                   |                             |
+
+--------------------------------------------------------------------------------------------------------
 purchase
 | Field Name    | Data Type | Length  | Description                       | Example Data                |
 | --------------| --------- | ------- | ----------------------------------| --------------------------- |
 | purchaseid    | CHAR      | 10      | PK, unique                        | P251009001                  |
-| supplierid    | CHAR      | 10      | FK to distributor.distibutor.id   | SUP000001                   |
+| distributorid | CHAR      | 10      | FK to distributor.distibutor.id   | SUP000001                   |
 | userid        | CHAR      | 10      | FK to user.userid                 | U251009001                  |
 | purchasedate  | DATE      | —       |                                   | 2025-09-15                  |
-| notes         | TEXT      | —       |                                   | Invoice #123                |
+| purchasenotes | TEXT      | —       |                                   | Invoice #123                |
 
----------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
 purchasedetail
 |  Field Name   | Data Type | Length  | Description                       | Example Data                |
 | ------------- | --------- | ------- | ----------------------------------| --------------------------- |
 | purchaseid    | CHAR      | 10      | FK to purchase.purchase.id        | P251009001                  |
 | itemid        | CHAR      | 10      | FK to item.itemid                 |                             |
-| quantity      | INT       | —       |                                   |                             |
-| buyprice      | INT       | —       |                                   |                             |
+| purchasequantity INT      | —       |                                   |                             |
+| purchaseprice | INT       | —       |                                   |                             |
 
----------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
 sales
 | Field Name    | Data Type | Length  | Description                       | Example Data                |
 | ------------- | --------- | ------- | ----------------------------------| --------------------------- |
@@ -83,20 +103,20 @@ sales
 | customerid    | CHAR      | 10      | FK to customer.customerid         | C251001001                  |
 | userid        | CHAR      | 10      | FK to user.userid                 | U251009001                  |
 | salesdate     | DATE      | —       |                                   | 2025-09-15                  |
-| notes         | TEXT      | —       |                                   | Invoice #123                |
+| salesnotes    | TEXT      | —       |                                   | Invoice #123                |
 
----------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
 salesdetail
 |  Field Name   | Data Type | Length  | Description                       | Example Data                |
 | ------------- | --------- | ------- | ----------------------------------| --------------------------- |
 | salesid       | CHAR      | 10      | FK to sales.salesid               | S251009001                  |
 | itemid        | CHAR      | 10      | FK to item.itemid                 |                             |
-| quantity      | INT       | —       |                                   |                             |
-| sellprice     | INT       | —       |                                   |                             |
+| salesquantity | INT       | —       |                                   |                             |
+| salesprice    | INT       | —       |                                   |                             |
 
----------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
                                                     PAGES
----------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
 Login Page
 ----------
 - username

@@ -1,29 +1,39 @@
-exports.create = async (student) => {
-    const {nama_siswa, alamat_siswa, tanggal_siswa, jurusan_siswa} = student;
-    const [result] = await pool.query(
-        "INSERT INTO students (nama_siswa, alamat_siswa, tanggal_siswa, jurusan_siswa) VALUES (?, ?, ?, ?)",
-        [nama_siswa, alamat_siswa, tanggal_siswa, jurusan_siswa]
-    );
-    return result.insertId;
+const pool = require('../database');
+
+exports.getById = async (id) => {
+  const [rows] = await pool.query("SELECT * FROM students WHERE kode_siswa = ?", [id]);
+  return rows[0];
 };
 
+exports.update = async (id, student) => {
+  const { nama_siswa, alamat_siswa, tanggal_siswa, jurusan_siswa } = student;
+  const [result] = await pool.query(
+    "UPDATE students SET nama_siswa = ?, alamat_siswa = ?, tanggal_siswa = ?, jurusan_siswa = ? WHERE kode_siswa = ?",
+    [nama_siswa, alamat_siswa, tanggal_siswa, jurusan_siswa, id]
+  );
+  return result.affectedRows;
+};
 
+exports.remove = async (id) => {
+  const [result] = await pool.query("DELETE FROM students WHERE kode_siswa = ?", [id]);
+  return result.affectedRows;
+};
 
-exports.updateStudent = async (req, res) => {
-    try{
-        const {id} = req.params;
-        const studentData = req.body;
-        const affectedRows = await Student.update(id, studentData);
-        if (affectedRows === 0) {
-            return res.status(484).json({message: 'Student not found'});
-        }
-        res.json({message: 'Student updated successfully'});
-    } catch (err) {
-        res.status(500).json({error: err.message});
-    }
-}
+exports.search = async (query) => {
+  const [rows] = await pool.query("SELECT * FROM students WHERE nama_siswa LIKE ?", [`%${query}%`]);
+  return rows;
+};
 
-exports.deleteStudent = async (req, res) => {
-    const {id} = req.params;
+exports.getAll = async () => {
+  const [rows] = await pool.query("SELECT * FROM students");
+  return rows;
+};
 
-}
+exports.create = async (student) => {
+  const { nama_siswa, alamat_siswa, tanggal_siswa, jurusan_siswa } = student;
+  const [result] = await pool.query(
+    "INSERT INTO students (nama_siswa, alamat_siswa, tanggal_siswa, jurusan_siswa) VALUES (?, ?, ?, ?)",
+    [nama_siswa, alamat_siswa, tanggal_siswa, jurusan_siswa]
+  );
+  return result.insertId;
+};
